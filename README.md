@@ -1,33 +1,51 @@
-<h2>Langkah Kerja Peta 1:</h2>
+<h2>Langkah Kerja Peta 2:</h2>
 
-1. Temukan file ne_10m_populated_places_simple.zip di Browser QGIS dan        perluas. Pilih file ne_10m_populated_places_simple.shp dan seret ke     kanvas.
+1. Temukan file nybb_19a.zip di Peramban QGIS dan kembangkan. Pilih layer nybb_19a/nybb.shp dan seret ke kanvas. Ini adalah lapisan poligon yang mewakili batas wilayah di kota New York.
 
-2. Lapisan baru ne_10m_populated_places_simple sekarang akan dimuat di QGIS dan Anda akan melihat banyak titik yang mewakili tempat-tempat berpenduduk di dunia. Tampilan default di kanvas QGIS menunjukkan geometri lapisan GIS. Setiap titik juga memiliki atribut terkait. Mari kita lihat mereka. Temukan Bilah Alat Atribut. Toolbar ini berisi banyak alat yang berguna untuk memeriksa, melihat, memilih, dan memodifikasi atribut dari sebuah lapisan.
+2. Selanjutnya, cari file V_SSS_SEGMENTRATING_1.zip dan perluas. Pilih layer dot_V_SSS_SEGMENTRATING_1_20190129.shp dan tambahkan ke kanvas. Ini adalah lapisan garis dari semua jalan di kota.
 
-3. Klik tombol Identifikasi pada Bilah Alat Atribut. Setelah alat dipilih, klik titik mana pun di kanvas. Atribut terkait dari titik itu akan ditampilkan di panel Identifikasi Hasil baru. Setelah Anda selesai menjelajahi atribut dari titik yang berbeda, Anda dapat mengklik tombol Tutup.
+3. Mari kita periksa atribut yang tersedia untuk setiap fitur lapisan dot_V_SSS_SEGMENTRATING_1_20190129. Klik kanan dan pilih Buka Tabel Atribut.
 
-4. Daripada melihat atribut satu fitur pada satu waktu, kita dapat melihat semuanya bersama-sama sebagai sebuah tabel. Klik tombol Open Attribute Table pada Attributes Toolbar. Anda juga dapat mengklik kanan layer ne_10m_populated_places_simple dan memilih Open Attribute Table.
+4. Anda akan melihat atribut yang disebut Rating_B yang memiliki nilai dalam rentang 0-10 yang mewakili peringkat segmen jalan. Atribut RatingWord memiliki peringkat deskriptif. Kita dapat menggunakan kolom Rating_B untuk menghitung rating rata-rata.
 
-5. Anda dapat menggulir secara horizontal dan menemukan kolom pop_max. Bidang ini berisi populasi tempat terkait. Anda dapat mengklik dua kali pada tajuk bidang untuk mengurutkan kolom dalam urutan menurun.
+5. Anda mungkin telah memperhatikan bahwa beberapa fitur memiliki peringkat NR. Ini adalah segmen yang tidak diberi peringkat. Memasukkan mereka ke dalam analisis kami tidak akan benar. Sebelum kita melakukan penggabungan spasial, mari siapkan Filter untuk mengecualikan rekaman ini. Klik kanan layer dot_V_SSS_SEGMENTRATING_1_20190129 dan pilih Filter.
 
-6. Sekarang kita siap untuk melakukan query kita pada atribut-atribut ini. QGIS menggunakan ekspresi seperti SQL untuk melakukan query. Klik Pilih fitur menggunakan tombol ekspresi.
+6. Di Pembuat Kueri, ketikkan ekspresi berikut untuk memilih semua rekaman yang tidak diberi peringkat NR. Anda juga dapat membuat ekspresi secara interaktif dengan mengklik Bidang, Operator, dan memilih Nilai yang sesuai. Klik Oke.
 
-7. Di jendela Select By Expression, perluas bagian Fields and Values ​​dan klik dua kali label pop_max. Anda akan melihat bahwa itu ditambahkan ke bagian ekspresi di bagian bawah. Jika Anda tidak yakin tentang nilai bidang, Anda dapat mengklik tombol Semua Unik untuk melihat nilai atribut apa yang ada dalam kumpulan data. Untuk latihan ini, kami mencari semua fitur yang memiliki populasi lebih dari 1 juta. Jadi lengkapi ekspresi seperti di bawah ini dan klik Select Features lalu Close. "pop_max" > 1000000
+"RatingWord" != 'NR'
 
-8. Anda akan melihat bahwa beberapa baris dalam tabel atribut sekarang dipilih. Jendela label juga berubah dan menunjukkan jumlah fitur yang dipilih.
+7. Anda akan melihat lapisan dot_V_SSS_SEGMENTRATING_1_20190129 sekarang memiliki ikon filter yang menunjukkan bahwa ada filter aktif yang diterapkan pada lapisan ini. Sekarang kita bisa melakukan penggabungan spasial menggunakan layer ini. Pergi ke Memproses ‣ Toolbox.
 
-9. Tutup jendela tabel atribut dan kembali ke jendela utama QGIS. Anda akan melihat bahwa subset poin sekarang dirender dengan warna kuning. Ini adalah hasil dari kueri kami dan titik yang dipilih adalah titik yang memiliki nilai atribut pop_max lebih besar dari 1000000.
+8. Cari dan temukan Vector general ‣ Gabungkan atribut berdasarkan algoritma lokasi (ringkasan). Klik dua kali untuk meluncurkannya.
+Catatan
 
-10. Mari kita perbarui kueri kita untuk menyertakan syarat bahwa tempat itu juga harus menjadi ibu kota selain memiliki populasi lebih dari 1 juta. Untuk membuka editor ekspresi dengan cepat, Anda dapat menggunakan tombol Select Features by Expression di Attributes Toolbar.
+9. Dalam dialog Gabung atribut berdasarkan lokasi (ringkasan), pilih nybb sebagai lapisan Input. Lapisan jalan dot_V_SSS_SEGMENTRATING_1_20190129 akan menjadi lapisan Gabung. Anda dapat membiarkan predikat Geometri ke Persimpangan default. Klik tombol … di sebelah Bidang untuk meringkas.
 
-11. Kolom yang berisi data tentang huruf kapital adalah adm0cap. Nilai 1 menunjukkan bahwa tempat tersebut adalah ibukota. Kita dapat menambahkan kriteria ini ke ekspresi kita sebelumnya menggunakan operator and. Masukkan ekspresi seperti di bawah ini dan klik Select Features lalu Close. "pop_max" > 1000000 and "adm0cap" = 1.
+Catatan
 
-12. Kembali ke jendela utama QGIS. Sekarang Anda akan melihat subset yang lebih kecil dari poin yang dipilih. Ini adalah hasil dari kueri kedua dan menunjukkan semua tempat dari kumpulan data yang merupakan ibu kota negara serta memiliki populasi lebih dari 1 juta.
+Kiat untuk membantu Anda memilih masukan yang benar dan menggabungkan lapisan: Lapisan masukan adalah salah satu yang akan dimodifikasi dengan atribut baru dalam gabungan spasial. Karena kami ingin bidang peringkat rata-rata ditambahkan ke lapisan wilayah, itu akan menjadi lapisan masukan.
 
-13. Sekarang kita akan mengekspor fitur yang dipilih sebagai layer baru. Klik kanan layer ne_10m_populated_places_simple dan pergi ke Ekspor Simpan Fitur Terpilih Sebagai…
+10. Pilih Rating_B dan klik OK.
 
-14. Anda dapat memilih format apa pun yang Anda sukai sebagai Format. Untuk latihan ini, kita akan memilih GeoJSON. GeoJSON adalah format berbasis teks yang digunakan secara luas dalam pemetaan web. Klik tombol … di sebelah Nama file dan masukkan population_capitals.geojson sebagai file output.
+11. Demikian pula, klik tombol … di sebelah Ringkasan untuk menghitung.
 
-15. Data input memiliki banyak kolom. Anda hanya dapat memilih sebagian dari kolom asli untuk diekspor. Perluas bagian Pilih bidang yang akan diekspor dan opsi ekspornya. Klik Deselect All dan centang kolom nama dan pop_max. Klik Oke.
+12. Pilih rata-rata sebagai operator ringkasan dan klik OK. Sekarang kita siap untuk memulai pemrosesan. Klik Jalankan.
 
-16. Sebuah layer baru population_capitals akan dimuat di QGIS. Anda dapat menghapus centang pada lapisan ne_10m_populated_places_simple untuk menyembunyikannya dan melihat poin dari lapisan yang baru diekspor.
+13. Algoritme pemrosesan akan bekerja melalui fitur dan menerapkan gabungan spasial. Verifikasi bahwa pekerjaan pemrosesan berhasil dan klik Tutup.
+
+14. Kembali ke jendela utama QGIS, Anda akan melihat layer Joined layer baru ditambahkan ke kanvas. Buka tabel atribut untuk lapisan ini. Anda akan melihat kolom baru Rating_B_mean ditambahkan ke input layer borough dengan rating rata-rata semua jalan yang bersinggungan dengan fitur tersebut.
+
+15. Sekarang kita dapat melakukan operasi terbalik. Terkadang analisis Anda memerlukan atribut dari lapisan lain berdasarkan hubungan spasial tetapi tidak menghitung ringkasan apa pun. Kita dapat menggunakan atribut Gabung dengan algoritme lokasi untuk analisis semacam itu. Tugasnya adalah menambahkan nama borough ke setiap fitur di layer jalan berdasarkan poligon borough mana yang bersinggungan dengannya. Sebelum kita menjalankan algoritme ini, mari hapus filter dari lapisan dot_V_SSS_SEGMENTRATING_1_20190129. Klik ikon filter dan tekan Hapus di Pembuat Kueri. Klik Oke.
+
+16. Matikan layer Joined di panel Layers. Temukan Vector general ‣ Gabung atribut berdasarkan algoritme lokasi di Processing Toolbox dan klik dua kali untuk meluncurkannya.
+
+17. Pilih dot_V_SSS_SEGMENTRATING_1_20190129 sebagai layer Input dan nybb sebagai layer Join. Anda dapat membiarkan predikat Geometri ke Persimpangan default. Klik tombol … di sebelah Fields untuk menambahkan dan memilih BoroName. Klik Oke.
+
+18. Segmen garis dapat melintasi batas wilayah, jadi kami memilih tipe Penggabungan sebagai fitur Peti terpisah untuk setiap fitur yang terletak (satu-ke-banyak). Klik Jalankan.
+
+19. Setelah pemrosesan selesai, buka tabel atribut dari layer Joined yang baru ditambahkan. Anda akan melihat bahwa ada atribut BoroName baru yang ditambahkan ke setiap fitur jalan.
+
+
+====================================================================================================================================================================
+
+<h3>Langkah Kerja Peta 3:</h2>
