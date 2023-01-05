@@ -1,4 +1,4 @@
-<h2>Langkah Kerja Peta 1:<h2>
+<h2>Langkah Kerja Peta 1:</h2>
 
 1. Temukan file ne_10m_populated_places_simple.zip di Browser QGIS dan        perluas. Pilih file ne_10m_populated_places_simple.shp dan seret ke     kanvas.
 
