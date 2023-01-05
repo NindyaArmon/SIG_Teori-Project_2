@@ -46,7 +46,8 @@ substr("id", -11)
 
 22. Di panel Layer Styling, pilih Graduated dari menu drop-down. Saat kami ingin membuat peta kepadatan populasi, kami ingin menetapkan warna berbeda untuk setiap fitur saluran sensus berdasarkan kepadatan populasi. Kami memiliki populasi di bidang Estimasi!!Total!!Total populasi, dan bidang area di ALAND. Klik tombol Ekspresi, untuk menghitung persentase jumlah penduduk pada setiap saluran pencacahan.
 
-Catatan: 
+Catatan : 
+
 Saat membuat peta tematik (choropleth) seperti ini, penting untuk menormalkan nilai yang Anda petakan. Memetakan jumlah total per poligon tidak benar. Penting untuk menormalkan nilai-nilai yang dibagi dengan luas. Jika Anda menampilkan total seperti kejahatan, Anda dapat menormalkannya dengan membaginya dengan total populasi, sehingga memetakan tingkat kejahatan dan bukan kejahatan. Belajarlah lagi
 
 23. Masukkan ekspresi berikut untuk menghitung kepadatan populasi. Area fitur diberikan dalam kilometer persegi. Kami kemudian mengubahnya menjadi meter persegi dengan mengalikannya dengan 1000000 dan menghitung kepadatan penduduk dengan rumus Penduduk/Luas. Pratinjau hasilnya dan klik OK.
@@ -92,7 +93,8 @@ Catatan
 
 9. Dalam dialog Gabung atribut berdasarkan lokasi (ringkasan), pilih nybb sebagai lapisan Input. Lapisan jalan dot_V_SSS_SEGMENTRATING_1_20190129 akan menjadi lapisan Gabung. Anda dapat membiarkan predikat Geometri ke Persimpangan default. Klik tombol … di sebelah Bidang untuk meringkas.
 
-Catatan: 
+Catatan :
+
 Kiat untuk membantu Anda memilih masukan yang benar dan menggabungkan lapisan: Lapisan masukan adalah salah satu yang akan dimodifikasi dengan atribut baru dalam gabungan spasial. Karena kami ingin bidang peringkat rata-rata ditambahkan ke lapisan wilayah, itu akan menjadi lapisan masukan.
 
 10. Pilih Rating_B dan klik OK.
@@ -115,7 +117,6 @@ Kiat untuk membantu Anda memilih masukan yang benar dan menggabungkan lapisan: L
 
 19. Setelah pemrosesan selesai, buka tabel atribut dari layer Joined yang baru ditambahkan. Anda akan melihat bahwa ada atribut BoroName baru yang ditambahkan ke setiap fitur jalan.
 
-
 ====================================================================================================================================================================
 
 <h3>Langkah Kerja Peta 3: Performing Spatial Queries (QGIS3)</h2>
@@ -134,7 +135,8 @@ Kiat untuk membantu Anda memilih masukan yang benar dan menggabungkan lapisan: L
 
 7. Saat memilih sistem koordinat yang diproyeksikan untuk analisis Anda, tempat pertama yang harus dicari adalah CRS regional untuk area yang diminati. Untuk Australia, Map Grid of Australia (MGA) 2020 adalah sistem grid berbasis UTM yang digunakan untuk pemetaan lokal dan regional. Melbourne termasuk dalam UTM Zone 55, jadi kita bisa memilih GDA 2020 / MGA zone 55 EPSG:7855` CRS.
 
-Catatan: 
+Catatan :
+
 Jika Anda tidak yakin dengan CRS lokal untuk wilayah tempat Anda bekerja, memilih CRS untuk zona UTM berdasarkan datum WGS84 adalah pilihan yang aman. Anda dapat mengetahui nomor zona UTM wilayah Anda menggunakan UTM Grid Zones of the World.
 
 8. Selanjutnya, klik tombol … di sebelah Diproyeksikan ulang dan pilih Simpan ke GeoPackage. Geopackage adalah data spasial format data terbuka yang direkomendasikan dan merupakan format pertukaran data default untuk QGIS3. Satu file GeoPackage .gpkg dapat berisi beberapa layer vektor dan raster.
@@ -153,7 +155,8 @@ Jika Anda tidak yakin dengan CRS lokal untuk wilayah tempat Anda bekerja, memili
 
 15. Anda akan melihat layer metro_stations_buffers baru dimuat di panel Layers. Sekarang kita dapat mengetahui titik mana dari layer bars_and_pubs yang termasuk dalam poligon dari layer metro_stations_buffers. Cari Vector selection ‣ Extract by Location tool dari Processing Toolbox dan klik dua kali untuk meluncurkannya.
 
-Catatan: 
+Catatan :
+
 Ekstrak berdasarkan lokasi akan membuat layer baru dengan fitur yang cocok dari kueri spasial. Jika Anda hanya ingin memilih fitur, gunakan alat Pilih berdasarkan lokasi.
 
 16. Dalam dialog Ekstrak berdasarkan lokasi, pilih bar_and_pubs sebagai fitur Ekstrak dari. Centang Intersect sebagai predikat geometri. Tetapkan metro_stations_buffers sebagai Dengan membandingkan fitur dari. Simpan output ke geopac.
@@ -188,7 +191,8 @@ Ekstrak berdasarkan lokasi akan membuat layer baru dengan fitur yang cocok dari 
 
 11. Sekarang saatnya untuk melakukan analisis tetangga terdekat. Cari dan temukan Pemrosesan ‣ Toolbox ‣ Analisis vektor ‣ Jarak ke alat hub (baris ke hub) terdekat. Klik dua kali untuk meluncurkannya.
 
-Catatan: 
+Catatan :
+
 Kita juga dapat menambahkan lapisan titik sebagai keluaran, gunakan alat Jarak ke hub (titik) terdekat untuk itu.
 
 12. Dalam kotak dialog Distance to Nearest Hub (Line to Hub), pilih Non null geometries sebagai layer Source points. Pilih ne_10m_populated_places_simple sebagai layer Destination hubs. Pilih nama sebagai atribut nama lapisan Hub. Alat ini juga akan menghitung jarak garis lurus antara tempat berpenduduk dan gempa terdekat. Tetapkan Kilometer sebagai unit Pengukuran. Klik ... di Jarak Hub dan klik Simpan ke Berkas… untuk menyimpan berkas sebagai gempa bumi_dengan_kota terdekat.gpkg . Klik Jalankan. Setelah pemrosesan selesai, klik Tutup.
@@ -219,7 +223,8 @@ Kita juga dapat menambahkan lapisan titik sebagai keluaran, gunakan alat Jarak k
 
 9. Sekarang kita akan menggunakan lapisan kabupaten untuk mengambil sampel raster dan menghitung suhu rata-rata untuk setiap kabupaten. Temukan file tl_2018_us_county.shp di Browser QGIS, seret ke kanvas.
 
-Catatan: 
+Catatan : 
+
 Sebagian besar algoritme pemrosesan akan membaca lapisan masukan dan membuat lapisan baru. Tetapi algoritma Statistik Zona berbeda. Itu memodifikasi lapisan input dan menambahkan atribut baru ke dalamnya. Itulah mengapa penting untuk meng-unzip file input terlebih dahulu. QGIS dapat memuat lapisan dari arsip zip secara langsung, tetapi tidak dapat mengubah lapisan yang di-zip. Algoritme pemrosesan akan gagal jika tidak dapat memperbarui lapisan input.
 
 10. Lapisan baru tl_2018_us_county akan dimuat ke panel Lapisan. Pergi ke Memproses ‣ Toolbox.
@@ -240,7 +245,7 @@ Sebagian besar algoritme pemrosesan akan membaca lapisan masukan dan membuat lap
 
 <h2>Langkah Kerja Peta 6: Calculating Raster Area (QGIS3)</h2>
 
-1.Buka zip semua file yang diunduh. Di Browser, cari folder yang berisi file batas WDPA_WDOECM_Apr2022_Publicc_10744_shp-polygons.shp dan drag-and-drop ke kanvas QGIS.
+1. Buka zip semua file yang diunduh. Di Browser, cari folder yang berisi file batas WDPA_WDOECM_Apr2022_Publicc_10744_shp-polygons.shp dan drag-and-drop ke kanvas QGIS.
 
 2. Sekarang cari petak raster penutup dunia ESA_WorldCover_10m_2020_v100_N24_E093_Map.tif dan jatuhkan ke kanvas QGIS.
 
@@ -258,7 +263,8 @@ Sebagian besar algoritme pemrosesan akan membaca lapisan masukan dan membuat lap
 
 9. Area minat kami termasuk dalam Zona UTM 46N. Cari 46 N dan pilih zona WGS 84 / UTM 46N CRS.
 
-Catatan: 
+Catatan :
+
 Untuk mengetahui zona UTM mana untuk wilayah Anda, lihat Zona UTM Apa Saya di situs web.
 
 10. Di bagian Diproyeksikan ulang, klik ... dan pilih Simpan Ke File…. Masukkan nama sebagai nationalpark_reprojected.gpkg. Klik Jalankan.
@@ -371,7 +377,8 @@ END
 
 22. Pada dialog Heatmap (Kernel Density Estimation), kita akan menggunakan parameter yang sama seperti sebelumnya. Pilih Radius sebagai 5000 meter dan Weight from field sebagai weight. Atur ukuran Pixel X dan ukuran Pixel Y menjadi 50 meter. Biarkan Kernel membentuk nilai default Quartic. Klik Jalankan.
 
-Catatan
+Catatan :
+
 Parameter Radius from field memungkinkan Anda menentukan radius pencarian dinamis untuk setiap titik. Ini dapat digunakan bersama dengan Bobot dari bidang untuk memiliki kontrol yang lebih baik tentang bagaimana pengaruh setiap titik tersebar.
 
 23. Setelah pemrosesan selesai, lapisan raster baru bernama OUTPUT akan dimuat. Visualisasi default jelek karena menggunakan penyaji abu-abu Singleband. Klik tombol panel Open the Layer Styling.
@@ -402,7 +409,8 @@ Parameter Radius from field memungkinkan Anda menentukan radius pencarian dinami
 
 10. Sekarang Anda siap untuk melihat animasi. Tetapkan Langkah sebagai 1 Tahun lalu klik tombol Putar untuk memulai animasi.
 
-Catatan: 
+Catatan :
+
 Jika animasi terlalu cepat, Anda dapat menyesuaikan frame rate dengan mengklik Temporal Setting (ikon gerigi kuning) di pojok kanan atas panel Temporal Controller. Menurunkan frame rate (frame per detik) akan memperlambat animasi.
 
 11. Akan sangat membantu juga untuk menampilkan label yang menunjukkan kerangka waktu saat ini di peta. Kita dapat melakukannya dengan menggunakan dekorasi Judul bawaan. Pergi ke Lihat ‣ Dekorasi ‣ Label Judul.
@@ -435,7 +443,8 @@ format_date(@map_start_time, 'yyyy')
 
 4. Dalam dialog pewarnaan Topologi, pilih India-States sebagai lapisan Input. Simpan semua parameter lain ke default dan klik Jalankan.
 
-Catatan: 
+Catatan :
+
 Algoritma pewarnaan topologi mengimplementasikan algoritma untuk mewarnai peta sehingga tidak ada poligon yang berdekatan memiliki warna yang sama. Ini adalah teknik kartografi yang berguna dan Teorema Empat Warna menyatakan bahwa 4 warna cukup untuk mencapai hasil ini. Ada versi teori graf dari torem ini yang disebut teorema Lima warna. Implementasi algoritma QGIS didasarkan pada grafik sehingga dalam praktiknya Anda akan melihat bahwa lapisan poligon kompleks seperti ini akan membutuhkan hingga 5 warna.
 
 5. Saat algoritme berjalan, Anda akan melihat peringatan ditampilkan di tab Log. 1 fitur di lapisan input memiliki geometri yang tidak valid dan dilewati selama pemrosesan. Pengaturan default untuk menangani geometri yang tidak valid di Kotak Alat Pemrosesan terletak di Pengaturan ‣ Opsi ‣ Pemrosesan ‣ Umum ‣ Pemfilteran fitur yang tidak valid dan diatur ke Lewati (abaikan) fitur dengan geometri yang tidak valid. Ini adalah pengaturan default yang bagus, tetapi jika masukan Anda besar, Anda mungkin melewatkan peringatan ini dan mungkin tidak mengetahui bahwa fitur masukan telah dilewati. Anda mungkin ingin mengubah nilainya menjadi Hentikan eksekusi algoritme saat geometri tidak valid.
@@ -446,7 +455,8 @@ Algoritma pewarnaan topologi mengimplementasikan algoritma untuk mewarnai peta s
 
 8. Saat algoritme selesai diproses, Anda akan melihat 3 lapisan baru di panel Lapisan - Keluaran valid, Keluaran tidak valid, dan Keluaran kesalahan. Keluaran Error lapisan berisi lokasi dan deskripsi kesalahan geometri. Klik kanan dan pilih Buka Tabel Atribut.
 
-Catatan: 
+Catatan :
+
 Dokumentasi QGIS memiliki artikel terperinci tentang Jenis pesan kesalahan dan artinya yang menjelaskan penyebab semua kesalahan.
 
 9. Anda akan melihat bahwa pesan kesalahannya adalah Ring self-intersection. Pilih baris dan klik tombol Zoom map to selected features. Saat memperbesar, Anda akan melihat akar penyebab galat geometri.
